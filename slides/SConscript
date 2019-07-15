@@ -1,0 +1,6 @@
+# -*- python -*-
+Import('env')
+
+tdd = env.Latex('design-principles.tex')
+env.Default(tdd)
+
