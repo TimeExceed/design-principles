@@ -1,0 +1,336 @@
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{tabu}
+\usepackage{amsmath}
+
+\title{\kaishu 陶大讲软件工程：原理}
+  \author{陶大}
+  \institute{YITU tech}
+  \date{July.\ 2019}
+
+\newcommand{\pagequote}[2]{
+  \Large
+  \begin{quotation}
+      #1
+  \end{quotation}
+  \flushright\normalsize --- {#2}
+}
+
+\renewcommand{\emph}[1]{\structure{#1}}
+
+\begin{document}
+\songti
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Outline}
+%   \tableofcontents
+% \end{frame}
+
+\section{破题}
+
+\begin{frame}
+    \pagequote{
+        Large-system programming has over the past decade been such a tar pit,
+        and many great and powerful beasts have thrashed violently in it...
+        No one thing seems to cause the difficulty -- any particular paw can be pulled away.}
+        {Frederick P. Brooks Jr.,\\``The Mythical Man-Month"}
+\end{frame}
+
+\begin{frame}
+    \frametitle{工程是什么?}
+    \pagequote{
+        The creative application of scientific principles to \only<1-2>{design or develop}\only<3->{\textcolor{blue}{design or develop}} structures, machines, apparatus, or manufacturing processes, or works utilizing them singly or in combination;
+        or to construct or operate the same with full \only<1-3>{cognizance of their design}\only<4->{\textcolor{orange}{cognizance of their design}};
+        or to \only<1-4>{forecast their behavior}\only<5->{\textcolor{red}{forecast their behavior}} under specific operating conditions;
+        all as respects an \only<1>{intended function}\only<2->{\textcolor{green}{intended function}}, economics of operation and safety to life and property.}
+        {The American Engineers' Council for Professional Development}
+\end{frame}
+
+\begin{frame}
+    \frametitle{软件工程的差异}
+    \pagequote{\noindent\center 软件是活的！}{陶大}
+\end{frame}
+
+\section{论可靠性}
+
+\begin{frame}
+    \frametitle{传统工程的可靠性理论}
+    \begin{center}
+        \large
+        MTTF = Mean Time To Failure
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{软件工程的可靠性理论}
+    \pagequote{What doesn't kill you, makes you stronger.}{Friedrich W. Nietzsche}
+\end{frame}
+
+\begin{frame}
+    \frametitle{传统工程的可靠性理论}
+    \[
+    F=1-(1-p)^n
+    \]
+    \begin{center}
+        \begin{tabu}{l}
+            $F$: 系统出错的概率；\\
+            $p$: 每次改动出错的概率；\\
+            $n$: 改动的次数。
+        \end{tabu}
+    \end{center}
+\end{frame}
+
+\begin{frame}
+    \frametitle{软件工程的可靠性理论}
+    \pagequote{It takes all the running you can do, to keep in the same place.}
+        {``Red Queen hypothesis" by Van Valen\\originated from Lewis Carroll}
+    \note[item]{
+        为了稳，你必须要折腾。
+    }
+\end{frame}
+
+\section{论设计}
+
+\begin{frame}
+    \frametitle{传统工程的设计}
+    \pagequote{Architecture is the design activity of the architect.}{Wikipedia}
+    \note[item]{
+        两个区别：
+        \begin{enumerate}
+            \item 建筑师不搬砖。
+            \item 设计一旦完成便不可变。
+        \end{enumerate}
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{软件的设计}
+    \begin{columns}[t]
+        \begin{column}{0.45\textwidth}
+            \begin{block}{微观设计}
+                要点在适度抽象
+                \begin{itemize}
+                    \item 从代码中来，回代码中去。
+                    \item 不要怕改代码，不要怕改得多。但是要回答，怎么控制风险。
+                    \item 多语言合力：动静结合、业务胶水与能力构件结合。
+                \end{itemize}
+            \end{block}
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \begin{block}{宏观设计}
+                要点在商业战略
+                \begin{itemize}
+                    \item 谁花钱、谁用、什么条件下用、解决什么问题
+                    \item 不同的业务语言意味着不同的选择压力, esp.,\ 对多样性的要求
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+    \note[item]{
+        宏观设计、微观设计的工作范围约略对应概要设计和详细设计。
+        但是指导思想不同。
+    }
+    \note[item]{
+        微观设计是涌现出来的，不是设计出来的。
+        抽象的目的是模块化，模块化的目的是专业化。
+        不是为了代码复用。
+        高代码复用不是一个值得追求的目标。
+    }
+    \note[item]{
+        SOLID是工具，不是不可违背的天条。
+    }
+    \note[item]{
+        一门静态语言提供能力构件，解决高性能、低资源消耗。
+        一门动态语言提供业务胶水，解决快速业务定制、动态行为。
+        典型是浏览器。
+        用进化论的黑话来讲，不同的语言应对不同的进化压力。
+        识别不同的进化压力需要对业务的深度认知。
+    }
+\end{frame}
+
+\subsection{微观设计}
+
+\begin{frame}
+    \frametitle{微观设计}
+    \begin{center}
+        \includegraphics[height=0.7\textheight]{refactor.png}
+    \end{center}
+    \note[item]{
+        这本书讲的是：设计怎样从代码中涌现出来。
+        但是我们今天不讲这本书。
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{两个OOP}
+    \begin{columns}[t]
+        \begin{column}{0.45\textwidth}
+            \begin{block}{众多对象通过通讯连接在一起}
+                \begin{itemize}
+                    \item 这个方向诞生了Erlang、Akka、Go
+                \end{itemize}
+            \end{block}
+            \note[item]{
+                函数调用也是通讯。
+            }
+        \end{column}
+        \begin{column}{0.45\textwidth}
+            \begin{block}{通过类和继承安排各个对象的拓扑结构}
+                \begin{itemize}
+                    \item 这个方向导致柏拉图式设计
+                \end{itemize}
+            \end{block}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{柏拉图主义、集合论与面向对象设计}
+    \begin{block}{如何设计一个“鸟”？}
+        “鸟”要不要\mintinline{java}{fly}方法？
+        \begin{itemize}
+            \item 这里有一只鸭子。鸭子是鸟。鸟会飞。所以鸭子会飞。
+            \item 鸵鸟不会飞。蝙蝠会飞。
+        \end{itemize}
+        \note[item]{
+            柏拉图主义认为存在一个理念世界。
+            理念世界里的东西都是完美的。
+            现实世界的万物都是理念世界的不完美投射。
+            类-继承体系的设计的问题正在于削不完美现实的脚适完美理念的履。
+            \begin{itemize}
+                \item 要么，你放一个空实现。
+                    那么调用者，你不知道你调用了一个对象的一个方法会不会炸。
+                \item 要么，你要做一个大而无当不知所云的抽象。
+                    比如junit的\mintinline{java}{setUp}/\mintinline{java}{tearDown}。
+            \end{itemize}
+
+            其中的关键是，完美的理念，by definition，是完美的，没有进化的余地。
+            毕其功于一役，我是不信的。
+        }
+        \note[item]{
+            我批评的是作为建模工具的柏拉图主义面向对象设计。
+            继承作为实现层面的语言工具，我不反对。
+            虽然我不认为代码复用是一个值得追求的目标。
+        }
+    \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{OOP的解药}
+    \begin{block}{面向接口(Trait-based)设计}
+        接口体现能力，不谈理念，不套圈圈。
+        \begin{itemize}
+            \item \mintinline{java}{Flyable}接口。鸭子、蝙蝠实现这个接口，鸵鸟不实现这个接口。
+            \item 抽象代数的思维
+        \end{itemize}
+        \note[item]{
+            我不管你底下具体是什么，只要你具备群公理，我就可以用。
+        }
+        \note[item]{
+            在这个模式下，难题是怎么提炼接口。
+            不同的抽象思路会导致不同的接口。
+            这里没有对错。
+            只是语言支持的抽象工具必须要丰富。
+        }
+    \end{block}
+    \begin{block}{函数式编程}
+        函数式编程提供新的抽象思路，更关注数据流，而非控制流。
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{On Architectures}
+    \pagequote{To the man who only has a hammer, everything he encounters begins to look like a nail.}{Abraham Maslow}
+\end{frame}
+
+\subsection{宏观设计与组织结构}
+
+\begin{frame}
+    \frametitle{宏观设计与组织结构}
+    \pagequote{
+        organizations which design systems\ldots~are constrained to produce designs
+        which are copies of the communication structures of these organizations.}
+        {M. Conway}
+\end{frame}
+
+\begin{frame}
+    \frametitle{宏观设计与组织结构}
+    \pagequote{宏观设计是伪装成技术决策的产品决策、商业决策。}{陶大}
+\end{frame}
+
+\begin{frame}
+    \frametitle{宏观设计与组织结构}
+    \begin{block}{宏观设计须回答}
+        \begin{enumerate}
+            \item 各部分的用户、客户、价值何在？
+            \item 基于前者的判断，回答选择压力何在(比如多样性)？
+            \item 满足前述两者的资源模型如何？
+            \item 前述所有诸款的动态如何？
+        \end{enumerate}
+        \note[item]{
+            深入了解业务语言和业务流程有所助益。
+        }
+        \note[item]{
+            宏观设计里无需避讳因人设岗。
+        }
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{宏观设计与组织结构}
+    \begin{corollary}
+        基础设施也必须直面商业压力。
+    \end{corollary}
+    \note[item]{
+        作为成本中心和作为利润中心，面对的压力类型不同。
+
+        成本中心强调控制支出、控制风险。
+        比方说IT。
+        挣钱不是IT的工作，花钱才是。
+        但是老板不会让乱花钱。
+        所以会有一堆流程来约束花钱。
+    }
+    \note[item]{
+        中台的逻辑推到极致就是云。
+    }
+\end{frame}
+
+\begin{frame}
+    \frametitle{宏观设计与组织结构}
+    \begin{corollary}
+        压力类型不同的组件不宜放在一个团队内。
+    \end{corollary}
+    \note[item]{
+        这里有团队能力模型的问题、团队文化的问题。
+        最主要的问题是吸血-扯后腿的问题。
+    }
+\end{frame}
+
+\section{总结}
+
+\begin{frame}
+    \frametitle{总结}
+    \begin{block}{~}
+        \begin{itemize}
+            \item 软件是活的
+                \begin{itemize}
+                    \item 可靠性
+                \end{itemize}
+            \item 微观设计
+                \begin{itemize}
+                    \item OOP, trait-based, FP
+                \end{itemize}
+            \item 宏观设计和组织结构
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \pagequote{What's your problem?}{Robin Li}
+\end{frame}
+
+\end{document}

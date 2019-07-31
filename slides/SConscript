@@ -1,6 +1,5 @@
 # -*- python -*-
 Import('env')
 
-tdd = env.Latex('design-principles.tex')
-env.Default(tdd)
-
+pdf = [env.Latex('se-principles.all.tex'), env.Latex('se-principles.pure.tex')]
+env.Default(pdf)
