@@ -4,12 +4,13 @@
 \usepackage{tabu}
 \usepackage{amsmath}
 
+\setbeamertemplate{note page}[plain]
 % $BEAMER_NOTES
 
 \title{\kaishu 陶大讲软件工程：原理}
   \author{陶大}
   \institute{YITU tech}
-  \date{July.\ 2019}
+  \date{Created in July.\ 2019, Updated in May.\ 2021}
 
 \newcommand{\pagequote}[2]{
   \Large
@@ -47,11 +48,24 @@
     \frametitle{工程是什么?}
     \pagequote{
         The creative application of scientific principles to \only<1-2>{design or develop}\only<3->{\textcolor{blue}{design or develop}} structures, machines, apparatus, or manufacturing processes, or works utilizing them singly or in combination;
-        or to construct or operate the same with full \only<1-3>{cognizance of their design}\only<4->{\textcolor{orange}{cognizance of their design}};
+        or to construct or operate the same with \only<1-3>{full cognizance of their design}\only<4->{\textcolor{orange}{cognizance of their design}};
         or to \only<1-4>{forecast their behavior}\only<5->{\textcolor{red}{forecast their behavior}} under specific operating conditions;
         all as respects an \only<1>{intended function}\only<2->{\textcolor{green}{intended function}}, economics of operation and safety to life and property.}
         {The American Engineers' Council for Professional Development}
 \end{frame}
+
+\note{
+    \begin{enumerate}
+        \item intended function: 价值创造
+        \item design or develop: 实现手段
+        \item full cognizance of their design: 要看文档（如果有的话）。
+            一般来讲，动手之前先看tutorial已经胜过80\%的码农了。
+        \item forecast their behavior: 我一直强调，程序不是写出来通过测试就结束了。
+            这个标准太低了。
+            代码本质上要回答问题：在什么情况下如何行为。
+            也就是说，只顾撸功能而不考虑可观测性不符合工程标准，是耍流氓。
+    \end{enumerate}
+}
 
 \begin{frame}
     \frametitle{软件工程的差异}
@@ -68,10 +82,29 @@
     \end{center}
 \end{frame}
 
+\note{
+    \begin{itemize}
+        \item 传统工程的可靠性理论的基础是材料的物理老化。
+            软件当然也要考虑硬盘坏道、GPU烧坏甚至紫外线翻掉内存一个bit，
+            但是，一般来讲，软件作为一个逻辑的构建，是不会老化的。
+    \end{itemize}
+}
+
 \begin{frame}
     \frametitle{软件工程的可靠性理论}
     \pagequote{What doesn't kill you, makes you stronger.}{Friedrich W. Nietzsche}
 \end{frame}
+
+\note{
+    \begin{itemize}
+        \item 软件的可靠性取决于从设计者到开发者对风险的识别。
+            说人话，他们见识过多少坑、经历过多少坑决定了软件的可靠性。
+        \item 软件更像生命体。
+        \item BTW, 我不相信软件工程师存在什么35岁线。
+            个别的情况会有，总会存在不需要可靠性的场景。
+            行业整体上不可能。
+    \end{itemize}
+}
 
 \begin{frame}
     \frametitle{传统工程的可靠性理论}
@@ -87,28 +120,46 @@
     \end{center}
 \end{frame}
 
+\note{
+    所以，要想得到一个稳定的系统，外行人自然的直觉是\textbf{不折腾}。
+    只要不停的修bug，总会得到一个很稳的系统。
+    
+    这是对的。
+    然而这种看法忽略了软件最大的两项风险：
+    \begin{enumerate}
+        \item 对软件来讲，没人用是比挂掉更大的风险。
+        \item 软件作为一个逻辑构建，其可靠性是有前提假设的。
+            比如疫情期间“扶我起来”的COBOL程序员们。
+    \end{enumerate}
+}
+
 \begin{frame}
     \frametitle{软件工程的可靠性理论}
     \pagequote{It takes all the running you can do, to keep in the same place.}
         {``Red Queen hypothesis" by Van Valen\\originated from Lewis Carroll}
-    \note[item]{
-        为了稳，你必须要折腾。
-    }
 \end{frame}
+
+\note{
+    而任何一个被人使用的系统，人总会不断挑战其边界。
+    所以，\textbf{为了稳，你必须要折腾}。
+}
 
 \section{论设计}
 
 \begin{frame}
     \frametitle{传统工程的设计}
     \pagequote{Architecture is the design activity of the architect.}{Wikipedia}
-    \note[item]{
-        两个区别：
-        \begin{enumerate}
-            \item 建筑师不搬砖。
-            \item 设计一旦完成便不可变。
-        \end{enumerate}
-    }
 \end{frame}
+
+\note{
+    软件工程最初从建筑学习了很多。
+    现在回顾，基本上是条弯路。
+    两个区别：
+    \begin{enumerate}
+        \item 建筑师不搬砖。
+        \item 建筑设计一旦完成便不可变。
+    \end{enumerate}
+}
 
 \begin{frame}
     \frametitle{软件的设计}
@@ -133,27 +184,25 @@
             \end{block}
         \end{column}
     \end{columns}
-    \note[item]{
-        宏观设计、微观设计的工作范围约略对应概要设计和详细设计。
-        但是指导思想不同。
-    }
-    \note[item]{
-        微观设计是涌现出来的，不是设计出来的。
-        抽象的目的是模块化，模块化的目的是专业化。
-        不是为了代码复用。
-        高代码复用不是一个值得追求的目标。
-    }
-    \note[item]{
-        SOLID是工具，不是不可违背的天条。
-    }
-    \note[item]{
-        一门静态语言提供能力构件，解决高性能、低资源消耗。
-        一门动态语言提供业务胶水，解决快速业务定制、动态行为。
-        典型是浏览器。
-        用进化论的黑话来讲，不同的语言应对不同的进化压力。
-        识别不同的进化压力需要对业务的深度认知。
-    }
 \end{frame}
+
+\note{
+    \begin{itemize}
+        \item 宏观设计、微观设计的工作范围约略对应概要设计和详细设计。
+            但是指导思想不同。
+        \item 微观设计是涌现出来的，不是设计出来的。
+            抽象的目的是模块化，模块化的目的是专业化。
+            不是为了代码复用。
+            高代码复用不是一个值得追求的目标。
+        \item SOLID是工具，不是不可违背的天条。
+            抽象的关键是\textbf{适度}，适业务需求的度。
+        \item 一门静态语言提供能力构件，提供高性能、低资源消耗。
+            一门动态语言提供业务胶水，解决快速业务定制、动态行为。
+            典型是浏览器。
+            用进化论的黑话来讲，不同的语言应对不同的进化压力。
+            识别不同的进化压力需要对业务的深度认知。
+    \end{itemize}
+}
 
 \subsection{微观设计}
 
@@ -163,7 +212,7 @@
         \includegraphics[height=0.7\textheight]{refactor.png}
     \end{center}
     \note[item]{
-        这本书讲的是：设计怎样从代码中涌现出来。
+        这本书讲的是：微观设计怎样从代码中涌现出来。
         但是我们今天不讲这本书。
     }
 \end{frame}
@@ -193,11 +242,11 @@
 
 \begin{frame}[fragile]
     \frametitle{柏拉图主义、集合论与面向对象设计}
-    \begin{block}{如何设计一个“鸟”？}
-        “鸟”要不要\mintinline{java}{fly}方法？
+    \begin{block}{如何设计一个“鸟”类？}
+        “鸟”要不要\mintinline{java}{fly()}方法？
         \begin{itemize}
             \item 这里有一只鸭子。鸭子是鸟。鸟会飞。所以鸭子会飞。
-            \item 鸵鸟不会飞。蝙蝠会飞。
+            \item 然而，鸵鸟不会飞、蝙蝠会飞。
         \end{itemize}
         \note[item]{
             柏拉图主义认为存在一个理念世界。
@@ -211,7 +260,7 @@
                     比如junit的\mintinline{java}{setUp}/\mintinline{java}{tearDown}。
             \end{itemize}
 
-            其中的关键是，完美的理念，by definition，是完美的，没有进化的余地。
+            其中的关键是，\textbf{完美的理念，by definition，是完美的，没有进化的余地}。
             毕其功于一役，我是不信的。
         }
         \note[item]{
@@ -231,17 +280,20 @@
             \item 抽象代数的思维
         \end{itemize}
         \note[item]{
-            我不管你底下具体是什么，只要你具备群公理，我就可以用。
+            我不管你底下具体是什么，只要你具备群公理，你就是一个群，我就可以用。
         }
         \note[item]{
             在这个模式下，难题是怎么提炼接口。
             不同的抽象思路会导致不同的接口。
             这里没有对错。
-            只是语言支持的抽象工具必须要丰富。
         }
     \end{block}
     \begin{block}{函数式编程}
         函数式编程提供新的抽象思路，更关注数据流，而非控制流。
+        \note[item]{
+            这里不展开讲FP。
+            参见我其他的slides。
+        }
     \end{block}
 \end{frame}
 
@@ -250,19 +302,27 @@
     \pagequote{To the man who only has a hammer, everything he encounters begins to look like a nail.}{Abraham Maslow}
 \end{frame}
 
+\note{
+    我做技术选型，提供更丰富的抽象能力一定是重要的考虑因素。
+    这就是我认为rust/c++好过go/java的原因，也是k8s好过spring cloud的原因。
+
+    但是大家知道，我在基础设施部主持的开发项目都选go，没有选rust。
+    现实决策需要因时制宜、因地制宜的权衡。
+}
+
 \subsection{宏观设计与组织结构}
 
 \begin{frame}
     \frametitle{宏观设计与组织结构}
     \pagequote{
-        organizations which design systems\ldots~are constrained to produce designs
+        Organizations which design systems\ldots~are constrained to produce designs
         which are copies of the communication structures of these organizations.}
         {M. Conway}
 \end{frame}
 
 \begin{frame}
     \frametitle{宏观设计与组织结构}
-    \pagequote{宏观设计是伪装成技术决策的产品决策、商业决策。}{陶大}
+    \pagequote{宏观设计是伪装成技术决策的商业决策。}{陶大}
 \end{frame}
 
 \begin{frame}
@@ -274,13 +334,14 @@
             \item 满足前述两者的资源模型如何？
             \item 前述所有诸款的动态如何？
         \end{enumerate}
-        \note[item]{
-            深入了解业务语言和业务流程有所助益。
-        }
-        \note[item]{
-            宏观设计里无需避讳因人设岗。
-        }
     \end{block}
+    \note[item]{
+        更准确地说，是在大战略制订之后，\textbf{战略路线在技术战线的体现}。
+        所以，没有脱离业务的宏观设计。
+    }
+    \note[item]{
+        宏观设计里无需避讳因人设岗。
+    }
 \end{frame}
 
 \begin{frame}
@@ -299,6 +360,20 @@
     }
     \note[item]{
         中台的逻辑推到极致就是云。
+        中台，按照流行的说法，是把多个相似业务模块从各自业务里剥离出来，集中到一个团队去。
+        就此而言，中台有两个根本问题需要回答：
+        \begin{enumerate}
+            \item 怎样衡量中台团队的价值？
+            \item 怎样确定中台模块的演进方向？
+        \end{enumerate}
+        作为经济学家，我认为\textbf{谈钱}是个好办法。
+        \begin{itemize}
+            \item 货币提供了价值度量。
+            \item 货币提供了可粗可细的可比较性。
+                尤其货币是权衡大业务-小业务、优先级排序、中台做-业务做这些权衡的工具。
+            \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
+        \end{itemize}
+        都到这个份上了，难道不就是云吗？
     }
 \end{frame}
 
@@ -328,6 +403,9 @@
                     \item OOP, trait-based, FP
                 \end{itemize}
             \item 宏观设计和组织结构
+                \begin{itemize}
+                    \item 中台
+                \end{itemize}
         \end{itemize}
     \end{block}
 \end{frame}
