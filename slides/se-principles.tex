@@ -10,7 +10,8 @@
 \title{\kaishu 陶大讲软件工程：原理}
   \author{陶大}
   \institute{YITU tech}
-  \date{Created in July.\ 2019, Updated in May.\ 2021}
+  \date{Created in July.\ 2019,\\
+    Updated in May.\ 2021}
 
 \newcommand{\pagequote}[2]{
   \Large
@@ -48,7 +49,7 @@
     \frametitle{工程是什么?}
     \pagequote{
         The creative application of scientific principles to \only<1-2>{design or develop}\only<3->{\textcolor{blue}{design or develop}} structures, machines, apparatus, or manufacturing processes, or works utilizing them singly or in combination;
-        or to construct or operate the same with \only<1-3>{full cognizance of their design}\only<4->{\textcolor{orange}{cognizance of their design}};
+        or to construct or operate the same with \only<1-3>{full cognizance of their design}\only<4->{\textcolor{orange}{full cognizance of their design}};
         or to \only<1-4>{forecast their behavior}\only<5->{\textcolor{red}{forecast their behavior}} under specific operating conditions;
         all as respects an \only<1>{intended function}\only<2->{\textcolor{green}{intended function}}, economics of operation and safety to life and property.}
         {The American Engineers' Council for Professional Development}
@@ -193,7 +194,7 @@
         \item 微观设计是涌现出来的，不是设计出来的。
             抽象的目的是模块化，模块化的目的是专业化。
             不是为了代码复用。
-            高代码复用不是一个值得追求的目标。
+            代码复用是一种架构手段；复用率是一个观察指标；但不是一个值得追求的目标。
         \item SOLID是工具，不是不可违背的天条。
             抽象的关键是\textbf{适度}，适业务需求的度。
         \item 一门静态语言提供能力构件，提供高性能、低资源消耗。
@@ -346,9 +347,6 @@
 
 \begin{frame}
     \frametitle{宏观设计与组织结构}
-    \begin{corollary}
-        基础设施也必须直面商业压力。
-    \end{corollary}
     \note[item]{
         作为成本中心和作为利润中心，面对的压力类型不同。
 
@@ -357,23 +355,6 @@
         挣钱不是IT的工作，花钱才是。
         但是老板不会让乱花钱。
         所以会有一堆流程来约束花钱。
-    }
-    \note[item]{
-        中台的逻辑推到极致就是云。
-        中台，按照流行的说法，是把多个相似业务模块从各自业务里剥离出来，集中到一个团队去。
-        就此而言，中台有两个根本问题需要回答：
-        \begin{enumerate}
-            \item 怎样衡量中台团队的价值？
-            \item 怎样确定中台模块的演进方向？
-        \end{enumerate}
-        作为经济学家，我认为\textbf{谈钱}是个好办法。
-        \begin{itemize}
-            \item 货币提供了价值度量。
-            \item 货币提供了可粗可细的可比较性。
-                尤其货币是权衡大业务-小业务、优先级排序、中台做-业务做这些权衡的工具。
-            \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
-        \end{itemize}
-        都到这个份上了，难道不就是云吗？
     }
 \end{frame}
 
@@ -387,6 +368,163 @@
         最主要的问题是吸血-扯后腿的问题。
     }
 \end{frame}
+
+\section{案例试讲}
+\subsection{中台和基础设施}
+
+\begin{frame}
+    \frametitle{中台}
+    \begin{block}{是什么？}
+        中台把多个相似业务模块从各自业务里剥离出来，集中到一个团队去。
+    \end{block}
+    \begin{block}<2->{根本问题}
+        \begin{itemize}
+            \item 怎样衡量中台团队的价值？
+            \item 怎样确定中台模块的演进方向？
+        \end{itemize}
+    \end{block}
+    \begin{block}<3->{解决问题之工具}
+        作为经济学家，我认为\textbf{谈钱}是个好办法。
+        \begin{itemize}
+            \item 货币提供了价值度量。
+            \item 货币提供了可粗可细的可比较性。
+                大业务-小业务、重要-紧急……这些权衡中，货币都可以是基础的工具。
+            \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\note{
+    \begin{itemize}
+        \item 中台，by definition, 就有复用的意思。
+            回忆一下我对“代码复用”的评论。
+        \item 这两个问题还处在战略层面。
+            在我的理论体系里，大战略层面的问题是“专业化如何可能”？
+        \item 都到这个份上了，难道不就是云吗？
+    \end{itemize}
+}
+
+\begin{frame}
+    \pagequote{中台的逻辑推到极致就是云。}{陶大}
+\end{frame}
+
+\begin{frame}
+    \frametitle{基础设施}
+    \begin{corollary}
+        基础设施也必须直面商业压力。
+    \end{corollary}
+\end{frame}
+
+\note{
+    这是说，基础设施也要有自己的商业模型。
+    \begin{itemize}
+        \item 可以不直接面对公司的客户，但要有自己的客户，可以是内部客户。
+        \item 要能讲得清楚自己的价值创造，并且以什么成本创造了怎样的价值流。
+        \item 要谈钱。
+    \end{itemize}
+}
+
+\subsection{工具链}
+
+\begin{frame}
+    \frametitle{工具链}
+    \begin{block}{资源模型及其动态}
+        \begin{itemize}
+            \item 产出端：收益人群是一线研发。
+                \begin{itemize}
+                    \item 庞大且分散
+                    \item 每个人收益都不大
+                    \item 没有决策花钱之权
+                \end{itemize}
+            \item 投入端：必须老司机把握方向盘
+                \begin{itemize}
+                    \item 设计和开发阶段需要老司机，维护阶段不需要。
+                \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\note{
+    \begin{itemize}
+        \item 工具链最难的问题不在开发、不在设计，甚至不在推广，而在商业模型。
+        \item 产出端的情况意味着，工具链的改进很难评估价值。
+        \item 投入端的动态意味着，DevOps是不适合工具链的。
+            于是就需要回答：老司机的激励是什么？为什么他会好好做？
+        \item 结论：一般而论，工具链不值得做。
+    \end{itemize}
+}
+
+\subsection{测试}
+
+\begin{frame}
+    \pagequote{
+        Software testing is an investigation conducted to provide stakeholders 
+        with \emph{information about the quality} of the software product or service under test.}
+        {Wikipedia}
+\end{frame}
+
+\note{
+    \begin{itemize}
+        \item Wikipedia的观点反对软件测试是quality assurance。
+            Bug都是架构师设计出来、开发写出来的，修也是他们去修，测试在任何意义上都无法“保障质量”。
+            \begin{itemize}
+                \item 整个quality assurance的理论体系构建在MTTF之上，从建筑业和流水线工业品借鉴过来的。
+                    软件工程早期的弯路之一。
+            \end{itemize}
+        \item 然而这个观点仍然是错的。
+            本质上，\emph{软件作为纯逻辑的存在，其质量可以感受，不可度量}。
+        \item 没有两个bug是完全一样的。如果有，那bug不在那个层面。
+    \end{itemize}
+}
+
+\begin{frame}
+    \pagequote{
+        每个软件都有bug。只是我不知道它们在哪里。}
+        {陶大}
+\end{frame}
+
+\begin{frame}
+    \frametitle{测试}
+    \begin{block}{~}
+        测试回答一个软件/系统，在指定环境下\emph{应当}如何行为。
+        测试的职责应当分散在
+        \begin{itemize}
+            \item 产品。
+                定义上，测试和PRD没有本质区别。
+            \item 架构师。
+                架构师是业务语言到技术语言的翻译官。
+                那么把关键场景翻译成测试也很合理。
+            \item 工程师。
+                自己准备写什么自己没有个B数吗？
+                单元测试尤其合理。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \pagequote{
+        不应当存在测试团队。}
+        {陶大}
+\end{frame}
+
+\subsection{统一API}
+
+\begin{frame}
+    \frametitle{统一API}
+    \begin{block}{~}
+        \begin{itemize}
+            \item API本质是生态位的划分。
+            \item 评价API好坏的标准：促进演化还是妨害演化。
+            \item Adapters，很丑，但在很多时候是好的。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\note{
+    \begin{itemize}
+        \item 从促演化还是妨演化的角度评价，OneAPI的结果是差的。
+    \end{itemize}
+}
 
 \section{总结}
 
@@ -404,7 +542,14 @@
                 \end{itemize}
             \item 宏观设计和组织结构
                 \begin{itemize}
-                    \item 中台
+                    \item 战略路线在技术战线的体现
+                \end{itemize}
+            \item 案例
+                \begin{itemize}
+                    \item 中台逻辑的极致是云
+                    \item 工具链一般不值得做
+                    \item 不应当存在测试团队
+                    \item OneAPI得其人而不得其时，惜哉
                 \end{itemize}
         \end{itemize}
     \end{block}
