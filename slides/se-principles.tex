@@ -442,9 +442,9 @@
     \begin{itemize}
         \item 工具链最难的问题不在开发、不在设计，甚至不在推广，而在商业模型。
         \item 产出端的情况意味着，工具链的改进很难评估价值。
-        \item 投入端的动态意味着，DevOps是不适合工具链的。
+        \item 投入端的动态意味着，DevOps不适合工具链，除非事情足够复杂，周期很长。
             于是就需要回答：老司机的激励是什么？为什么他会好好做？
-        \item 结论：一般而论，工具链不值得做。
+        \item 结论：为其他团队做工具链，一般不值得。
     \end{itemize}
 }
 
@@ -515,18 +515,21 @@
 
 \begin{frame}
     \frametitle{统一API}
-    \begin{block}{~}
-        \begin{itemize}
-            \item API本质是生态位的划分。
-            \item 评价API好坏的标准：促进演化还是妨害演化。
-            \item Adapters，很丑，但在很多时候是好的。
-        \end{itemize}
-    \end{block}
+    \begin{center}
+        \includegraphics[width=\textwidth]{the-tower-of-babel.jpg}
+        \\
+        The Tower of Babel
+    \end{center}
 \end{frame}
 
 \note{
     \begin{itemize}
-        \item 从促演化还是妨演化的角度评价，OneAPI的结果是差的。
+        \item API本质是生态位的划分。
+        \item 评价API好坏的标准：促进演化还是妨害演化。
+            \begin{itemize}
+                \item OneAPI的结果是差的。
+            \end{itemize}
+        \item Adapters，很丑，但在很多时候是好的。
     \end{itemize}
 }
 
