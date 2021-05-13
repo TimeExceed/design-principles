@@ -7,10 +7,11 @@
 \setbeamertemplate{note page}[plain]
 % $BEAMER_NOTES
 
-\title{\kaishu 陶大讲软件工程：原理}
+\title{\kaishu 陶大讲软件工程}
   \author{陶大}
   \institute{YITU tech}
-  \date{Created in July.\ 2019,\\
+  \date{\small
+    Created in July.\ 2019,\\
     Updated in May.\ 2021}
 
 \newcommand{\pagequote}[2]{
@@ -64,7 +65,6 @@
         \item forecast their behavior: 我一直强调，程序不是写出来通过测试就结束了。
             这个标准太低了。
             代码本质上要回答问题：在什么情况下如何行为。
-            也就是说，只顾撸功能而不考虑可观测性不符合工程标准，是耍流氓。
     \end{enumerate}
 }
 
@@ -122,16 +122,21 @@
 \end{frame}
 
 \note{
-    所以，要想得到一个稳定的系统，外行人自然的直觉是\textbf{不折腾}。
-    只要不停的修bug，总会得到一个很稳的系统。
-    
-    这是对的。
-    然而这种看法忽略了软件最大的两项风险：
-    \begin{enumerate}
-        \item 对软件来讲，没人用是比挂掉更大的风险。
-        \item 软件作为一个逻辑构建，其可靠性是有前提假设的。
-            比如疫情期间“扶我起来”的COBOL程序员们。
-    \end{enumerate}
+    \begin{itemize}
+        \item 所以，要想得到一个稳定的系统，外行人自然的直觉是\textbf{不折腾}。
+            只要不停的修bug，总会得到一个很稳的系统。
+            这是对的。
+        \item 然而这种看法忽略了软件最大的两项风险：
+            \begin{enumerate}
+                \item 对软件来讲，没人用是比挂掉更大的风险。
+                \item 软件作为一个逻辑构建，其可靠性是有前提假设的。
+                    比如疫情期间“扶我起来”的COBOL程序员们。
+            \end{enumerate}
+            而任何一个被人使用的系统，人总会不断挑战其边界。
+            所以，\textbf{为了稳，你必须要折腾}。
+        \item 所以，软件工程在实操上的核心问题是：
+            如何低成本、低风险地折腾。
+    \end{itemize}
 }
 
 \begin{frame}
@@ -139,11 +144,6 @@
     \pagequote{It takes all the running you can do, to keep in the same place.}
         {``Red Queen hypothesis" by Van Valen\\originated from Lewis Carroll}
 \end{frame}
-
-\note{
-    而任何一个被人使用的系统，人总会不断挑战其边界。
-    所以，\textbf{为了稳，你必须要折腾}。
-}
 
 \section{论设计}
 
@@ -337,24 +337,11 @@
         \end{enumerate}
     \end{block}
     \note[item]{
-        更准确地说，是在大战略制订之后，\textbf{战略路线在技术战线的体现}。
+        更准确地说，是\textbf{战略路线在技术战线的体现}。
         所以，没有脱离业务的宏观设计。
     }
     \note[item]{
         宏观设计里无需避讳因人设岗。
-    }
-\end{frame}
-
-\begin{frame}
-    \frametitle{宏观设计与组织结构}
-    \note[item]{
-        作为成本中心和作为利润中心，面对的压力类型不同。
-
-        成本中心强调控制支出、控制风险。
-        比方说IT。
-        挣钱不是IT的工作，花钱才是。
-        但是老板不会让乱花钱。
-        所以会有一堆流程来约束花钱。
     }
 \end{frame}
 
@@ -366,6 +353,15 @@
     \note[item]{
         这里有团队能力模型的问题、团队文化的问题。
         最主要的问题是吸血-扯后腿的问题。
+    }
+    \note[item]{
+        作为成本中心和作为利润中心，面对的压力类型不同。
+
+        成本中心强调控制支出、控制风险。
+        比方说IT。
+        挣钱不是IT的工作，花钱才是。
+        但是老板不会让乱花钱。
+        所以会有一堆流程来约束花钱。
     }
 \end{frame}
 
@@ -383,15 +379,6 @@
             \item 怎样确定中台模块的演进方向？
         \end{itemize}
     \end{block}
-    \begin{block}<3->{解决问题之工具}
-        作为经济学家，我认为\textbf{谈钱}是个好办法。
-        \begin{itemize}
-            \item 货币提供了价值度量。
-            \item 货币提供了可粗可细的可比较性。
-                大业务-小业务、重要-紧急……这些权衡中，货币都可以是基础的工具。
-            \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
-        \end{itemize}
-    \end{block}
 \end{frame}
 
 \note{
@@ -400,7 +387,14 @@
             回忆一下我对“代码复用”的评论。
         \item 这两个问题还处在战略层面。
             在我的理论体系里，大战略层面的问题是“专业化如何可能”？
-        \item 都到这个份上了，难道不就是云吗？
+        \item 作为经济学家，我认为\textbf{谈钱}是个好办法。
+            \begin{itemize}
+                \item 货币提供了价值度量。而且正常人类都懂。
+                \item 货币提供了可粗可细的可比较性。
+                    大业务-小业务、重要-紧急……这些权衡中，货币都可以是基础的工具。
+                \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
+            \end{itemize}
+            都到这个份上了，难道不就是云吗？
     \end{itemize}
 }
 
@@ -485,25 +479,35 @@
 
 \begin{frame}
     \frametitle{测试}
-    \begin{block}{~}
+    \begin{block}{是什么？}
         测试回答一个软件/系统，在指定环境下\emph{应当}如何行为。
-        测试的职责应当分散在
+    \end{block}
+    \begin{block}{谁来干？}
+        测试的职责\emph{应当分散}
         \begin{itemize}
-            \item 产品。
-                定义上，测试和PRD没有本质区别。
-            \item 架构师。
-                架构师是业务语言到技术语言的翻译官。
-                那么把关键场景翻译成测试也很合理。
-            \item 工程师。
-                自己准备写什么自己没有个B数吗？
-                单元测试尤其合理。
+            \item 产品
+            \item 架构师
+            \item 工程师
         \end{itemize}
     \end{block}
 \end{frame}
 
+\note{
+    \begin{itemize}
+        \item 产品。
+            定义上，测试和PRD没有本质区别。
+        \item 架构师。
+            架构师是业务语言到技术语言的翻译官。
+            那么把关键场景翻译成测试也很合理。
+        \item 工程师。
+            自己准备写什么自己没有个B数吗？
+            单元测试尤其合理。
+    \end{itemize}
+}
+
 \begin{frame}
     \pagequote{
-        不应当存在测试团队。}
+        干掉测试团队！}
         {陶大}
 \end{frame}
 
