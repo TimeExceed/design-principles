@@ -1,5 +1,5 @@
 # -*- python -*-
 Import('env')
 
-pdf = [env.Latex('se-principles.all.tex'), env.Latex('se-principles.pure.tex')]
+pdf = env.Beamer('se-principles.tex')
 env.Default(pdf)
