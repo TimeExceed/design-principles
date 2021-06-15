@@ -36,6 +36,21 @@
 %   \tableofcontents
 % \end{frame}
 
+\begin{frame}
+    \begin{block}{我是谁？}
+        \begin{itemize}
+            \item 上交计算机博士
+                \begin{itemize}
+                    \item 理论计算机方向。对几乎所有软件领域都有涉猎：软件工程、编程语言、数据库、分布式系统$\cdots$
+                \end{itemize}
+            \item 野生经济学家
+                \begin{itemize}
+                    \item 拍卖论和机制设计
+                \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
 \section{破题}
 
 \begin{frame}
@@ -366,88 +381,6 @@
 \end{frame}
 
 \section{案例试讲}
-\subsection{中台和基础设施}
-
-\begin{frame}
-    \frametitle{中台}
-    \begin{block}{是什么？}
-        中台把多个相似业务模块从各自业务里剥离出来，集中到一个团队去。
-    \end{block}
-    \begin{block}<2->{根本问题}
-        \begin{itemize}
-            \item 怎样衡量中台团队的价值？
-            \item 怎样确定中台模块的演进方向？
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\note{
-    \begin{itemize}
-        \item 中台，by definition, 就有复用的意思。
-            回忆一下我对“代码复用”的评论。
-        \item 这两个问题还处在战略层面。
-            在我的理论体系里，大战略层面的问题是“专业化如何可能”？
-        \item 作为经济学家，我认为\textbf{谈钱}是个好办法。
-            \begin{itemize}
-                \item 货币提供了价值度量。而且正常人类都懂。
-                \item 货币提供了可粗可细的可比较性。
-                    大业务-小业务、重要-紧急……这些权衡中，货币都可以是基础的工具。
-                \item 基于货币，有大把的工具、方法辅助决策中台模块的演进方向（或者，应该称为商业决策）。
-            \end{itemize}
-            都到这个份上了，难道不就是云吗？
-    \end{itemize}
-}
-
-\begin{frame}
-    \pagequote{中台的逻辑推到极致就是云。}{陶大}
-\end{frame}
-
-\begin{frame}
-    \frametitle{基础设施}
-    \begin{corollary}
-        基础设施也必须直面商业压力。
-    \end{corollary}
-\end{frame}
-
-\note{
-    这是说，基础设施也要有自己的商业模型。
-    \begin{itemize}
-        \item 可以不直接面对公司的客户，但要有自己的客户，可以是内部客户。
-        \item 要能讲得清楚自己的价值创造，并且以什么成本创造了怎样的价值流。
-        \item 要谈钱。
-    \end{itemize}
-}
-
-\subsection{工具链}
-
-\begin{frame}
-    \frametitle{工具链}
-    \begin{block}{资源模型及其动态}
-        \begin{itemize}
-            \item 产出端：收益人群是一线研发。
-                \begin{itemize}
-                    \item 庞大且分散
-                    \item 每个人收益都不大
-                    \item 没有决策花钱之权
-                \end{itemize}
-            \item 投入端：必须老司机把握方向盘
-                \begin{itemize}
-                    \item 设计和开发阶段需要老司机，维护阶段不需要。
-                \end{itemize}
-        \end{itemize}
-    \end{block}
-\end{frame}
-
-\note{
-    \begin{itemize}
-        \item 工具链最难的问题不在开发、不在设计，甚至不在推广，而在商业模型。
-        \item 产出端的情况意味着，工具链的改进很难评估价值。
-        \item 投入端的动态意味着，DevOps不适合工具链，除非事情足够复杂，周期很长。
-            于是就需要回答：老司机的激励是什么？为什么他会好好做？
-        \item 结论：为其他团队做工具链，一般不值得。
-    \end{itemize}
-}
-
 \subsection{测试}
 
 \begin{frame}
@@ -511,28 +444,6 @@
         {陶大}
 \end{frame}
 
-\subsection{统一API}
-
-\begin{frame}
-    \frametitle{统一API}
-    \begin{center}
-        \includegraphics[width=\textwidth]{the-tower-of-babel.jpg}
-        \\
-        The Tower of Babel
-    \end{center}
-\end{frame}
-
-\note{
-    \begin{itemize}
-        \item API本质是生态位的划分。
-        \item 评价API好坏的标准：促进演化还是妨害演化。
-            \begin{itemize}
-                \item OneAPI的结果是差的。
-            \end{itemize}
-        \item Adapters，很丑，但在很多时候是好的。
-    \end{itemize}
-}
-
 \section{总结}
 
 \begin{frame}
@@ -553,11 +464,174 @@
                 \end{itemize}
             \item 案例
                 \begin{itemize}
-                    \item 中台逻辑的极致是云
-                    \item 工具链一般不值得做
                     \item 不应当存在测试团队
-                    \item OneAPI得其人而不得其时，惜哉
                 \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        软件中开发流程和成本之间怎么平衡？如果碰到有类似ASPICE审查要求时，怎么取舍？
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item “开发流程和成本”分别指什么？
+            \item CMMI定义软件研发的要素，至于怎么实现这些要素，它不管。
+                ASPICE是这样吗？
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        提升软件质量行之有效的方法？
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item 要在观念：质量是所有人的事，除了测试。
+            \item 观念更新之后，方可谈具体的技术，比如fuzzy testing、Coq等。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        汽车领域软件开发方式的变革趋势？
+    \end{alertblock}
+    \begin{block}{A}
+        无可评论。
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        \only<1>{
+            关于需求：
+            \begin{enumerate}
+                \item 在写需求时，什么时候应该聚焦在前端的，最浅层次，最通俗易懂的需求上？什么时候应该从设计层面来写需求，考虑各种意外情况下如何丰富完善自己的需求？
+                \item 需求书对于细节、对于参数如何设计、对于极端情况没有考虑到的，是应该由设计人员来规避、完善需求文档；还是责任属于需求人员本身，严格来讲应该让写需求的人自己去完善需求文档？
+                \item 需求文档更新确认，设计文档攥写，模型或者代码的开发应该把握什么共同开发的节奏才能起到如下效果： a) 前期考虑细致的设计提高了开发效率  b) 设计文档及时补充完善，方便个人总结与同事之间的评审 c) 需求、细节的修改不会导致严重的设计文档返工
+            \end{enumerate}
+        }
+        \only<2>{
+            抽象来讲：谁应该写需求文档？应该怎么写？
+        }
+    \end{alertblock}
+    \begin{block}<2>{A}
+        \begin{itemize}
+            \item 需求文档并非最终交付物的一部分。因此是overhead，非benefit。
+            \item 关于需求文档的需求分析：用户、客户分别是谁？价值创造如何？约束条件如何？
+            \item 一个建议：谁对最终交付物负责，谁来决定谁写以及形式。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于设计：
+        \begin{enumerate}
+            \item 架构是什么？架构设计、分析的输出物是什么？一般格式如何？
+            \item 架构设计一般考虑哪些内容？怎么体现在输出物里？
+            \item 常说高内聚，低耦合，有没有什么实例来说明一下好的架构和不那么好的？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item 架构师是从业务语言到技术语言的翻译。
+                架构是业务的战略路线在技术领域的体现。
+            \item 考虑的重点：系统的风险何在？系统各组件演化的压力如何？
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于测试：
+        \begin{enumerate}
+            \item 测试中会碰到，自己评估下来不会有问题的地方，实际测试发现存在问题，您认为导致这种现象的原因是什么？ 是否认为，自认为无聊的、没有意义的、耗费时间较长的时间、往复的测试是有必要的，是需要调整心态去坚决执行的。
+            \item 关于“改了一行注释也需要重新测试”这样的言论；
+            \item 软件测试（MIL/HIL）非常耗时，业界的自动化做法有哪些？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item 测试是spec，不是quality assurance。
+            \item 不要试图和人性对抗。该工具解决的问题写工具去解决。
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于管理
+        \begin{enumerate}
+            \item 能否介绍下贵司在协同开发时是如何进行版本号和分支管理的呢？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item 可以。但大概率没用。
+            \item 你们用什么版本管理软件？
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于管理
+        \begin{enumerate}
+            \item 现场调试时发现总会有重复的问题出现在不同版本(或不同的项目)中，相关问题bug只是简单用excel记录，没有恰当的跟踪起来。请问有什么样的开源软件来管控此类问题？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item JIRA
+            \item GitLab的issue
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于管理
+        \begin{enumerate}
+            \item 当软件需求存在变更的可能性时，前期软件需求撰写、后期软件设计、开发要注意什么？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item leader/架构师必须懂业务。
+                \begin{itemize}
+                    \item 骑自行车的比方
+                \end{itemize}
+            \item 原型开发：快速体验、快速反馈、快速迭代
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Q\&A}
+    \begin{alertblock}{Q}
+        关于管理
+        \begin{enumerate}
+            \item 多人开发的时候，如何把控软件的质量？除了（1）peer review；（2）给出详尽的设计文档，规范，限制可发挥范围？
+        \end{enumerate}
+    \end{alertblock}
+    \begin{block}{A}
+        \begin{itemize}
+            \item 何为“多人”？老司机带新人？一群老司机分头开发feature？一群老司机共同开发同一个feature？多人和单人有何不同？
+            \item peer review不解决质量问题，它解决信息孤岛。质量提升是副作用。
+            \item 文档、规范都是overhead，因人而立、因人而废。
         \end{itemize}
     \end{block}
 \end{frame}
